@@ -1,0 +1,208 @@
+body, * {
+	margin: 0 auto;
+	padding: 0 0 0 0;
+    text-decoration: none;
+    text-align: center;
+    max-width: 1200px;
+}
+
+.head {
+	position: relative;
+	padding-bottom: 5px;
+	height: 50px;
+	width: 100%;
+	margin: 0 0 0 0;
+}
+
+.icon {
+	float: left;
+	opacity: 0.4;
+	height: 100%;
+}
+.icon img {
+	margin: 20px 5px 20px 5px ;
+}
+
+.icon img:hover{
+	opacity: 0.7;
+    filter: alpha(opacity=60);
+}
+
+#home {
+	opacity: 0.4;
+	height: 100%;
+	margin: 0 auto;
+}
+
+#home img:hover{
+	opacity: 0.7;
+    filter: alpha(opacity=60);
+}
+
+
+table {
+	margin:auto;
+    width: 100%;
+}
+
+#name {
+	border-top: 1px solid #efeef0;
+	letter-spacing: 0.1em;
+	text-align: center;
+	font-size: 30px;
+	margin: 0 auto 30px;
+	color: #dc8e84;
+	 -webkit-animation: fadein 3s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 3s; /* Firefox < 16 */
+        -ms-animation: fadein 3s; /* Internet Explorer */
+         -o-animation: fadein 3s; /* Opera < 12.1 */
+            animation: fadein 3s;
+}
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+.menu {
+	display: inline-block;
+	text-align: center;
+	padding: 1%;
+	color: rgb(102, 102, 102);
+	letter-spacing: 1px;
+	font-style: normal;
+	position: relative;
+	margin-bottom: 20px;
+	font-family: "Andale Mono", "Lucida Console", "Courier New", monospace;
+}
+#portfolio-title {
+	color: rgb(102, 102, 102);
+	font-family: "Andale Mono", "Lucida Console", "Courier New", monospace;
+    text-align: left;
+    font-size: 25px;
+}
+
+.menu:hover{
+	opacity: 0.6;
+    filter: alpha(opacity=60);
+}
+
+#about {
+	font-size: 16px;
+	font-family: "Andale Mono", "Lucida Console", "Courier New", monospace;
+	display: inline-block;
+	text-align: left;
+	color: rgb(102, 102, 102);
+	font-style: normal;
+	position: relative;	
+}
+
+.show{
+	opacity: 1;
+	transform:translate3d(0,0,0) scale(1);
+}
+.main {
+	margin-bottom: 70px;
+}
+
+#image {
+    background-image: url("../assets/IMG_4935.jpg");
+    background-size: cover;
+    background-position: center;
+	width: 90vw;
+	height: 82vh;
+	margin-top: 0.3%;
+}
+
+.post-image-caption {
+	font-size: 14px;
+	color: rgb(102, 102, 102);
+	margin: 20px auto 30px;
+	padding-bottom: 100px;
+
+}
+.post-image-caption::after {
+	content:"";
+	width: 200px;
+	border-top: 1px solid #818181;
+	display: block;
+	margin: inherit;
+}
+
+.post-footer {
+	display: block;
+	max-width: 596px;
+	height: 150px;
+	position: relative;
+	margin:auto;
+}
+
+.post-footer::after {
+	content:"";
+	background-image: url("../assets/foot.png");
+	background-position: center;
+	margin: 70px;
+	height: 35px;
+	position: absolute;
+	background-size: contain;
+	background-repeat: no-repeat;
+	left:0;
+	right:0;
+	top:0;
+}
+
+.stuff:hover img{
+  -webkit-filter: blur(3px);
+  filter: blur(3px);
+}
+
+.stuff:hover .title{
+  color: white;
+ -webkit-filter: opacity(100%);
+  filter: opacity(100%);
+}
+.stuff:hover .title-black{
+  color: black;
+ -webkit-filter: opacity(100%);
+  filter: opacity(100%);
+}
+
+.stuff {
+    position: relative;
+}
+
+.stuff img {
+  object-fit: cover;
+  width:320px;
+  height:240px;
+  padding: 6px 6px 6px 6px;
+}
+
+.title {
+    position: absolute;
+    top: 47%;
+    width: 100%;
+    text-align: center;
+    color: rgb(102, 102, 102);
+	font-family: "Andale Mono", "Lucida Console", "Courier New", monospace;
+  -webkit-filter: opacity(0%);
+  filter: opacity(0%);
+}
+.title-black {
+    position: absolute;
+    top: 47%;
+    width: 100%;
+    text-align: center;
+    color: rgb(0,0,0);
+	font-family: "Andale Mono", "Lucida Console", "Courier New", monospace;
+  -webkit-filter: opacity(0%);
+  filter: opacity(0%);
+}
+#introlink {
+    text-decoration: none;
+    color: black;
+}

@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+	<meta name="description"
+		content="Professional website - Dora Jambor"/>
+	<title>
+		Dora Jambor
+	</title>
+	<link rel="stylesheet" type="text/css" href="static/style.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+	<script src="display.js"></script>
+	<link rel="icon"  href="assets/maizy.png">
+</head>
+<body>
+	<table>
+		<tr>
+			<td> 
+				<div class="head">
+					<a class = "icon" style="cursor:pointer" href= "https://twitter.com/dorajambor"><img src=assets/twitter.png width=20 alt="t"></a>
+					<a class = "icon" href= "https://www.linkedin.com/in/dorajambor"><img src=assets/linkedin.png width=16 alt="in"></a>
+					<a class = "icon" href= "https://github.com/dorajam"><img src=assets/github.png width=16 alt="git"></a>	
+					<a class = "icon" href= "mailto:dorajambor@gmail.com"><img src=assets/gmail.png width=16.5 alt="g"></a>
+ 				</div>
+				<div id="name">dora jambor</div>
+				<span id = "home" style="cursor:pointer;" onclick="homeFunc()"><img src=assets/home.svg width=22 alt="H"></span>
+
+ 				<section>
+					<div style="cursor:pointer" class="menu" onclick="dropFunc1()">
+						<span>ABOUT</span>
+ 						</div>
+					</div>
+
+					<div style="cursor:pointer" class="menu">  
+						<a href="portfolio/index.html" style="color:rgb(102, 102, 102);">PORTFOLIO</a>
+					</div>
+
+					<div style="cursor:pointer" class="menu">
+						<a href="http://medium.com/@dorajambor" style="color:rgb(102, 102, 102);">THOUGHTS</a>
+					</div>
+				</section>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="main" style="height: 82vh; width:90vw">
+					<div id="image" ></div>
+					<div id="about" style="margin: 35px 20px 0 20px">
+                    <p style="text-align:left; width:55%; float:left;">
+                    <br>
+                    <br>
+I am currently building an artificial intelligence company that aims to help people take a more proactive approach to living healthier and more fulfilling lives. 
+If you share a similar mission, let&#39;s chat!
+<br>
+<br>
+On the side, I also help out as a technical consultant to various startup focusing on AI.
+                    <br>
+                    <br>
+                    Before entering the startup world, I was a graduate student and researcher in Computer Science at the Quebec AI Institute (MILA) and McGill University working with
+                    <a id="introlink" href="https://ca.linkedin.com/in/dzmitry-bahdanau-a716b391"><i>Dzmitry Bahdanau</i></a> (ServiceNow) 
+                    and 
+                    <a id="introlink" href="https://ai.facebook.com/people/joelle-pineau/"><i>Joelle Pineau</i></a> (Facebook). 
+                    Through this time, I was a visiting researcher at ServiceNow, and a resident scientist at NextAI and CDL startup incubators.
+                    My research area is natural language processing, specifically focusing on building AI models to automatically generate programs (Python, SQL etc.) from natural language, 
+                    with some related projects in knowledge graphs, graph representation learning and meta-learning. 
+                    <br>
+                    <br>
+                    Prior to that, I was a machine learning engineer at 
+                    <a href="https://shopify.com" id="introlink"><i>Shopify</i></a>
+                    working with recommender systems for personalization and search problems.
+                    
+                    <!-- I am also a proud graduate of the -->
+                    <!-- <a href="https://recurse.com" id="introlink"><i>Recurse Center</i></a> [Spring&#39;16]. -->
+
+                    <br><br>
+                    In my free time, I enjoy going on long runs, cooking delicious meals, practicing yoga and dancing. 
+                    <!-- swing dancing, playing the ukulele and building Ketik, a fully customizable mechanical keyboard for programmers.</p> -->
+                    <p><img src="assets/dora_pic.jpeg" style="float:right;width:350px;display:flex;"></p>
+					</div>
+					<p class="post-image-caption">Arab Street, Singapore 2015</p>
+				</div>
+			</td>
+		</tr>
+	</table>
+	<footer class = "post-footer"></footer>
+	<p id"signiture" style="color:rgb(102, 102, 102); font-size:12px; font-style:italic; padding-bottom:10px;">Handcrafted in New York City, design &amp; code by <br>Dora Jambor</p>
+	
+</body>
+<html>

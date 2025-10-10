@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+	<meta name="description"
+		content="Professional website - Dora Jambor"/>
+	<title>
+		Dora Jambor
+	</title>
+	<link rel="stylesheet" type="text/css" href="../../static/style.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.12.2.min.js" type="text/javascript"></script>
+	<link rel="icon"  href="../../assets/maizy.png">
+</head>
+<body>
+	<table>
+		<tr>
+			<td> 
+				<div class="head">
+					<a class = "icon" style="cursor:pointer" href= "https://twitter.com/dorajambor"><img src=../../assets/twitter.png width=20 alt="t"></a>
+					<a class = "icon" href= "https://www.linkedin.com/in/dorajambor"><img src=../../assets/linkedin.png width=16 alt="in"></a>
+					<a class = "icon" href= "https://github.com/dorajam"><img src=../../assets/github.png width=16 alt="git"></a>	
+					<a class = "icon" href= "mailto:dorajambor@gmail.com"><img src=../../assets/gmail.png width=16.5 alt="g"></a>
+				</div><p style="border-top: 1px solid #efeef0;"></p>
+			</td>
+		</tr>
+    </table>
+	<div class="main" style="width:71vw;">
+		<div id="about" style="font-size:15px;margin: 35px 20px 100px 20px; text-align:left">
+		<h2 style="text-align:left">Collaborative Autoencoders for Top-K Hierarchical
+Recommendations</h2>
+    <br>
+    <br>
+    <h3 style="tex-align:left">Authors: Dora Jambor and Putra Manggala</h3>
+    <br>
+    <br>
+    <div style="text-align:left">Upcoming poster presentation at WiML'18.</div>
+    <br>
+    <br>
+    <h3>Abstract from the paper:</h3>
+      In real-world recommender systems, items can often be organized into hierarchical taxonomies where
+       different levels of the taxonomies represent different levels of information. In Koenigstein et al.
+       (2011), flattened representations of hierarchical information are used to mitigate cold-start problems,
+       while in He et al. (2016), explicit hierarchical representations are used as recommender system inputs.
+    <br>
+    <br>
+       In this work, we consider a novel problem of top-K hierarchical recommendations, where we seek to
+       produce top-K recommendations for each level of the taxonomy. This is motivated by real-world
+       use cases, where e-commerce sellers need to produce recommendations at different granularities,
+       for example, a department store website might seek to produce top-K recommendations for clothing
+       brands (Gap vs Nike), for types of clothing (jeans vs shirt) within a brand, for styles (skinny vs boot
+       cut), and for colors (black or blue). In this example, brands, clothing types, styles and colors are
+       different levels of a hierarchical taxonomy. Providing these top-K lists simultaneously allows the
+       website to appeal to different abstraction level of the buyers’ interests via diversity [Castells et al.
+       (2015)].
+    <br>
+    <br>
+       We propose a variation of autoencoder-based collaborative filtering recommender system that directly
+       incorporates a pre-defined items’ taxonomy structure into the output label space of our model
+       as hierarchical output layers using maximum/average pooling, similar to the work in Xiong and
+       Manggala (2018). This ensures that the reconstruction loss function of the autoencoder is aware
+       of the errors within the hierarchical structure of the output. The hierarchical output layers enable
+       us to obtain predictions for every element at every level of the taxonomy simultaneously, and to
+       output top-K recommendations for every level of the taxonomy that are consistent with respect to the
+       taxonomy. Furthermore, the losses from the output layers are combined using a convex combination,
+       and the combination parameters reflect the importances of the different taxonomy levels. This allows
+       the recommender system designer with a prior information on the taxonomy level importances to
+       customize the loss function via the convex combination parameters.
+    <br>
+    <br>
+       Experiments were conducted on a dataset that contains top-K recommendations ground truths at
+       different levels of an item taxonomy. Our method’s performance is evaluated against a few baselines
+       using the convex combination of precision@k’s (with taxonomy level importances as parameters) for
+       top-K recommendation across all levels. Our variation is shown to significantly outperform other
+       baselines, and is guaranteed to be consistent with respect to the taxonomy.
+       <br>
+       <br>
+       <br>
+       <br>
+       <h4 style="float:left">References</h4>
+       <br>
+       <br>
+ Pablo Castells, Neil J Hurley, and Saul Vargas. 2015. Novelty and diversity in recommender systems.
+ In Recommender Systems Handbook. Springer, 881–918.
+       <br>
+       <br>
+ Ruining He, Chunbin Lin, Jianguo Wang, and Julian McAuley. 2016. Sherlock: sparse hierarchical
+ embeddings for visually-aware one-class collaborative filtering. IJCAI Proceedings of the Twenty-
+ Fifth International Joint Conference on Artificial Intelligence (2016).
+       <br>
+       <br>
+ Noam Koenigstein, Gideon Dror, and Yehuda Koren. 2011. Yahoo! music recommendations:
+ modeling music ratings with temporal dynamics and item taxonomy. In Proceedings of the fifth
+ ACM conference on Recommender systems. ACM, 165–172.
+       <br>
+       <br>
+ Tengke Xiong and Putra Manggala. 2018. Hierarchical Classification with Hierarchical Attention
+ Networks. KDD Deep Learning Day (2018).
+    </p>
+    </div>
+  </div>
+
+
+<footer class = "post-footer"></footer>
+<p id"signiture" style="color:rgb(102, 102, 102); font-size:12px; font-style:italic; padding-bottom:10px;">Handcrafted in New York City, design &amp; code by <br>Dora Jambor</p>
+
+</body>
+</html>
