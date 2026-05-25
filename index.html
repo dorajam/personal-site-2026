@@ -1,89 +1,598 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-	<meta name="description"
-		content="Professional website - Dora Jambor"/>
-	<title>
-		Dora Jambor
-	</title>
-	<link rel="stylesheet" type="text/css" href="static/style.css">
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
-    <script>window.jQuery || document.write('<script src="{{url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
-	<script src="display.js"></script>
-	<link rel="icon"  href="assets/maizy.png">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dora Jambor — Product, AI, healthtech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<style>
+  /* ---------- tokens (Sage palette) ---------- */
+  :root {
+    --bg:        #f6f5ef;   /* warm cream paper */
+    --ink:       #2f3a35;   /* soft forest-charcoal */
+    --muted:    #8e9b91;   /* sage grey */
+    --rule:      #e2e1d6;   /* hairline */
+    --accent:    #6b8e72;   /* dusty sage green */
+    --accent-soft: #e8eee6; /* pale sage tint */
+    --max:       1240px;
+    --sidebar:   280px;
+    --gap:       88px;
+    --pad-x:     20px;
+    --pad-y:     72px;
+    --fs-body:   15px;
+    --lh-body:   1.75;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { background: var(--bg); color: var(--ink); }
+  body {
+    margin: 0;
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: var(--accent); color: var(--bg); }
+
+  /* ---------- layout ---------- */
+  .page {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: var(--pad-y) var(--pad-x);
+    display: grid;
+    grid-template-columns: var(--sidebar) 1fr;
+    gap: var(--gap);
+    align-items: start;
+  }
+
+  /* ---------- sidebar ---------- */
+  aside.sidebar {
+    position: sticky;
+    top: var(--pad-y);
+    align-self: start;
+  }
+
+  /* ---------- portrait slot (optional) ----------
+     Three good spots for a photo:
+       (A) Top of sidebar — small square, current placement. Most editorial.
+       (B) Inside the bio block on the right — larger, more presence.
+       (C) Replace the teal square mark next to your name with a tiny avatar.
+     Toggle by removing the .portrait block, or moving it to the bio section. */
+  .portrait {
+    width: 92%;
+    height: auto;
+    aspect-ratio: 1;
+    margin: 0 0 32px 0;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid var(--rule);
+    transform: scaleX(-1);
+  }
+
+  .name {
+    font-size: 17px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin: 0 0 28px 0;
+    line-height: 1.3;
+  }
+  .name::after {
+    /* small teal square as a personal mark */
+    content: "";
+    display: inline-block;
+    width: 9px; height: 9px;
+    background: var(--accent);
+    margin-left: 8px;
+    transform: translateY(-1px);
+  }
+  .id-tags {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 28px 0;
+    color: var(--ink);
+    font-size: 14px;
+  }
+  .id-tags li { padding: 0; }
+  .id-tags li.muted { color: var(--muted); }
+  .id-tags a:hover {
+    background: var(--accent);
+    color: var(--bg);
+    text-decoration-color: transparent;
+  }
+
+  .social {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid var(--rule);
+    padding-top: 20px;
+  }
+  .social li { padding: 0; }
+
+  /* ---------- right column ---------- */
+  main.content { min-width: 0; }
+
+  .content > section + section { margin-top: 72px; }
+
+  h2.section-heading {
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--ink);
+    margin: 0 0 28px 0;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--muted);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  h2.section-heading .num {
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: 0;
+  }
+
+  p { margin: 0 0 1em 0; }
+  p:last-child { margin-bottom: 0; }
+
+  /* ---------- links ---------- */
+  a {
+    color: var(--ink);
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent);
+    background: color-mix(in oklab, var(--accent) 25%, transparent);
+    padding: 1px 6px;
+    transition: text-decoration-color 120ms ease, background-color 120ms ease;
+  }
+  a:hover {
+    text-decoration-color: var(--accent);
+    background: color-mix(in oklab, var(--accent) 35%, transparent);
+  }
+  main.content a:hover {
+    background: var(--accent);
+    color: var(--bg);
+    text-decoration-color: transparent;
+  }
+  a:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+  .social a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    padding: 4px 8px;
+    margin-left: -8px;
+    color: var(--accent);
+    font-weight: 400;
+    border-radius: 3px;
+    transition: background 120ms ease;
+  }
+  .social a:hover {
+    background: color-mix(in oklab, var(--accent) 15%, transparent);
+  }
+  .social svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    flex-shrink: 0;
+  }
+
+  /* ---------- bio placeholder ---------- */
+  .bio-placeholder {
+    border: 1px dashed color-mix(in oklab, var(--muted) 40%, transparent);
+    color: var(--muted);
+    padding: 28px 24px;
+    margin-top: 8px;
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .bio-placeholder .label {
+    display: inline-block;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-size: 11px;
+    margin-bottom: 8px;
+  }
+
+  /* ---------- work list ---------- */
+  .work-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .work-item .work-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+  .work-item .title {
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .work-item .role {
+    font-style: italic;
+    color: var(--muted);
+  }
+  .work-item .placeholder {
+    color: var(--muted);
+    font-size: 13px;
+    border-left: 2px solid var(--rule);
+    padding: 4px 0 4px 14px;
+    margin-top: 8px;
+  }
+
+  /* ---------- recognition list ---------- */
+  .recognition {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .recognition li {
+    display: block;
+    padding: 14px 0;
+    border-bottom: 1px dashed var(--rule);
+  }
+  .recognition li:last-child { border-bottom: none; }
+  .recognition .year {
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .recognition .year.none { color: color-mix(in oklab, var(--muted) 60%, transparent); }
+
+  /* ---------- featured talk ---------- */
+  .talk {
+    background: var(--accent-soft);
+    border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent);
+    padding: 28px 28px 24px;
+    position: relative;
+  }
+  .talk::before {
+    content: "FEATURED";
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: var(--bg);
+    color: var(--accent);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    padding: 0 8px;
+  }
+  .talk .talk-title {
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .talk .talk-meta {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 20px;
+  }
+  .video-link {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background:
+      repeating-linear-gradient(
+        45deg,
+        transparent 0 14px,
+        color-mix(in oklab, var(--accent) 8%, transparent) 14px 15px
+      ),
+      var(--accent-soft);
+    border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent);
+    display: grid;
+    place-items: center;
+    text-decoration: none;
+    transition: background-color 180ms ease, border-color 180ms ease;
+  }
+  .video-link:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+  }
+  .video-link-inner {
+    text-align: center;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 500;
+    background: var(--bg);
+    padding: 16px 24px;
+    border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .video-link:hover .video-link-inner {
+    border-color: var(--accent);
+  }
+  .video-link .play-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: var(--accent);
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+  }
+
+  /* ---------- publications ---------- */
+  .pubs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .pubs .pub-title {
+    font-style: italic;
+  }
+  .pubs .venue {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 4px;
+  }
+  .pubs .desc {
+    color: var(--ink);
+    font-size: 13.5px;
+    margin-top: 6px;
+    line-height: 1.7;
+  }
+
+  /* ---------- cta ---------- */
+  .cta {
+    border-left: 2px solid var(--accent);
+    padding: 4px 0 4px 24px;
+  }
+  .cta p { margin-bottom: 1.4em; }
+  .cta .lede {
+    font-size: 16px;
+    color: var(--ink);
+  }
+  .cta .secondary {
+    color: var(--ink);
+    font-size: 16px;
+  }
+  a.email-link,
+  span.email-link {
+    font-weight: 700;
+    background: color-mix(in oklab, var(--accent) 25%, transparent);
+    padding: 1px 6px;
+  }
+  a.email-link {
+    text-decoration-thickness: 1.5px;
+  }
+
+  /* ---------- contact form ---------- */
+  .contact-form {
+    margin-top: 32px;
+    padding: 28px;
+    background: var(--accent-soft);
+    border: 1px solid color-mix(in oklab, var(--accent) 25%, transparent);
+  }
+  .contact-form label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    font-family: inherit;
+    font-size: 14px;
+    padding: 12px 14px;
+    border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+    background: var(--bg);
+    color: var(--ink);
+    margin-bottom: 20px;
+    border-radius: 2px;
+  }
+  .contact-form input:focus,
+  .contact-form textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 0;
+    border-color: var(--accent);
+  }
+  .contact-form textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+  .contact-form button {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--bg);
+    background: var(--accent);
+    border: none;
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: background 120ms ease;
+  }
+  .contact-form button:hover {
+    background: color-mix(in oklab, var(--accent) 85%, var(--ink));
+  }
+  .contact-form button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* ---------- footer ---------- */
+  footer.foot {
+    margin-top: 96px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: 12px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 900px) {
+    :root {
+      --pad-x: 16px;
+      --pad-y: 56px;
+      --gap: 48px;
+    }
+    .page {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    aside.sidebar {
+      position: static;
+    }
+    .social {
+      display: flex;
+      gap: 24px;
+      padding-top: 16px;
+    }
+    .recognition li {
+      grid-template-columns: 1fr;
+      gap: 2px;
+      padding: 12px 0;
+    }
+    .recognition .year { font-size: 12px; }
+  }
+  @media (max-width: 500px) {
+    :root {
+      --pad-x: 12px;
+      --fs-body: 14px;
+    }
+    .talk { padding: 24px 18px 20px; }
+  }
+</style>
 </head>
 <body>
-	<table>
-		<tr>
-			<td> 
-				<div class="head">
-					<a class = "icon" style="cursor:pointer" href= "https://twitter.com/dorajambor"><img src=assets/twitter.png width=20 alt="t"></a>
-					<a class = "icon" href= "https://www.linkedin.com/in/dorajambor"><img src=assets/linkedin.png width=16 alt="in"></a>
-					<a class = "icon" href= "https://github.com/dorajam"><img src=assets/github.png width=16 alt="git"></a>	
-					<a class = "icon" href= "mailto:dorajambor@gmail.com"><img src=assets/gmail.png width=16.5 alt="g"></a>
- 				</div>
-				<div id="name">dora jambor</div>
-				<span id = "home" style="cursor:pointer;" onclick="homeFunc()"><img src=assets/home.svg width=22 alt="H"></span>
+  <div class="page">
 
- 				<section>
-					<div style="cursor:pointer" class="menu" onclick="dropFunc1()">
-						<span>ABOUT</span>
- 						</div>
-					</div>
+    <!-- ====================== LEFT SIDEBAR ====================== -->
+    <aside class="sidebar">
+      <!-- Optional portrait. Move to bio section, delete, or replace with <img>. -->
+      <img src="speaking - slush 1.jpg" alt="Dora Jambor" class="portrait" />
 
-					<div style="cursor:pointer" class="menu">  
-						<a href="portfolio/index.html" style="color:rgb(102, 102, 102);">PORTFOLIO</a>
-					</div>
+      <h1 class="name">Dora Jambor</h1>
 
-					<div style="cursor:pointer" class="menu">
-						<a href="http://medium.com/@dorajambor" style="color:rgb(102, 102, 102);">THOUGHTS</a>
-					</div>
-				</section>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<div class="main" style="height: 82vh; width:90vw">
-					<div id="image" ></div>
-					<div id="about" style="margin: 35px 20px 0 20px">
-                    <p style="text-align:left; width:55%; float:left;">
-                    <br>
-                    <br>
-I am currently building an artificial intelligence company that aims to help people take a more proactive approach to living healthier and more fulfilling lives. 
-If you share a similar mission, let&#39;s chat!
-<br>
-<br>
-On the side, I also help out as a technical consultant to various startup focusing on AI.
-                    <br>
-                    <br>
-                    Before entering the startup world, I was a graduate student and researcher in Computer Science at the Quebec AI Institute (MILA) and McGill University working with
-                    <a id="introlink" href="https://ca.linkedin.com/in/dzmitry-bahdanau-a716b391"><i>Dzmitry Bahdanau</i></a> (ServiceNow) 
-                    and 
-                    <a id="introlink" href="https://ai.facebook.com/people/joelle-pineau/"><i>Joelle Pineau</i></a> (Facebook). 
-                    Through this time, I was a visiting researcher at ServiceNow, and a resident scientist at NextAI and CDL startup incubators.
-                    My research area is natural language processing, specifically focusing on building AI models to automatically generate programs (Python, SQL etc.) from natural language, 
-                    with some related projects in knowledge graphs, graph representation learning and meta-learning. 
-                    <br>
-                    <br>
-                    Prior to that, I was a machine learning engineer at 
-                    <a href="https://shopify.com" id="introlink"><i>Shopify</i></a>
-                    working with recommender systems for personalization and search problems.
-                    
-                    <!-- I am also a proud graduate of the -->
-                    <!-- <a href="https://recurse.com" id="introlink"><i>Recurse Center</i></a> [Spring&#39;16]. -->
+      <ul class="id-tags">
+        <li>Product + AI + startups</li>
+        <li>Former Founder &amp; CEO @<a href="https://www.linkedin.com/company/mohanahealth/">Mohana</a></li>
+        <li>Former AI researcher @<a href="https://mila.quebec/en">MILA</a></li>
+      </ul>
 
-                    <br><br>
-                    In my free time, I enjoy going on long runs, cooking delicious meals, practicing yoga and dancing. 
-                    <!-- swing dancing, playing the ukulele and building Ketik, a fully customizable mechanical keyboard for programmers.</p> -->
-                    <p><img src="assets/dora_pic.jpeg" style="float:right;width:350px;display:flex;"></p>
-					</div>
-					<p class="post-image-caption">Arab Street, Singapore 2015</p>
-				</div>
-			</td>
-		</tr>
-	</table>
-	<footer class = "post-footer"></footer>
-	<p id"signiture" style="color:rgb(102, 102, 102); font-size:12px; font-style:italic; padding-bottom:10px;">Handcrafted in New York City, design &amp; code by <br>Dora Jambor</p>
-	
+      <ul class="social">
+        <li>
+          <a href="https://www.linkedin.com/in/dorajambor/" rel="me">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"/>
+            </svg>
+            LinkedIn
+          </a>
+        </li>
+        <li>
+          <a href="https://dorajambor.substack.com/" rel="me">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/>
+            </svg>
+            Substack
+          </a>
+        </li>
+        <li>
+          <a href="http://github.com/dorajam" rel="me" target="_blank">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+            </svg>
+            GitHub
+          </a>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- ====================== RIGHT COLUMN ====================== -->
+    <main class="content">
+
+      <!-- ---------- 1. BIO ---------- -->
+      <section id="bio" aria-label="Bio">
+        <p>Hey, I&rsquo;m Dora.</p>
+        <p>I&rsquo;m a product leader and founder with 10+ years of experience building AI products.</p>
+        <p>Until recently, I was the founder and CEO of <a href="https://www.linkedin.com/company/mohanahealth/">Mohana Health</a>, an award-winning femtech startup that helps women navigate hormonal health challenges by turning lab biomarkers into actionable insights about their bodies.</p>
+        <p>Before that, I was an AI research scientist developing LLMs for language to code translation (think Claude Code today). I had the privilege to do this work at one of the most reputable AI research institutions, <a href="https://mila.quebec/en">Mila</a>, working with <a href="https://scholar.google.ca/citations?user=Nq0dVMcAAAAJ&hl=en">Dima Bahdnau</a> and <a href="https://en.wikipedia.org/wiki/Jo%C3%ABlle_Pineau">Joelle Pineau</a>.</p>
+        <p>Before Mila, I was at <a href="http://shopify.com/">Shopify</a>, as one of their first AI engineers where I led the foundation of personalization across 1M+ merchants&rsquo; stores (think app store, home feeds, product recommendations).</p>
+        <p>Outside of that, I really enjoy working with founders, and have advised 40+ startups on their AI and product strategy.</p>
+        <p>When I don&rsquo;t do that, I enjoy long runs, kitchen experiments like fermentation and growing my own food, and teaching &amp; practicing yoga.</p>
+      </section>
+
+      <!-- ---------- 2. AS SEEN ON THE INTERNET ---------- -->
+      <section id="recognition">
+        <h2 class="section-heading">As Seen on the Internet</h2>
+
+        <ul class="recognition">
+          <li>
+            <span><a href="https://youtu.be/jorTXvPW1jE?si=1C08HzEW1cw3P7OV&t=814" target="_blank" rel="noopener noreferrer">Top 3 at Slush 100</a> — pitched Mohana to 10,000 people in Helsinki, selected from 1,000+ startups</span>
+          </li>
+          <li>
+            <span><a href="https://www.womeninai.co/post/honoring-the-excellence-of-women-in-ai-winners-at-wai-awards-north-america-2023" target="_blank" rel="noopener noreferrer">AI Entrepreneur of the Year</a> — Women in AI Awards, North America</span>
+          </li>
+          <li>
+            <span><a href="https://www.mcgill.ca/dobson/article/mohana-reimagining-womens-health" target="_blank" rel="noopener noreferrer">My Story with Mohana</a> &mdash; leaving a PhD to fix one of medicine&rsquo;s most overlooked areas in women&rsquo;s health.</span>
+          </li>
+          <li>
+            <span><a href="https://www.instagram.com/dorajambor" target="_blank" rel="noopener noreferrer">Musings on women&rsquo;s health</a> &mdash; my thoughts about preventative health and longevity for women.</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ---------- 3. CTA ---------- -->
+      <section id="contact">
+        <h2 class="section-heading">Let&rsquo;s talk</h2>
+
+        <div class="cta">
+          <p class="lede">
+            <a href="contact.html">Reach out to me</a> if you&rsquo;d like to work together:
+          </p>
+          <ul style="margin: 0 0 1.5em 0; padding-left: 20px;">
+            <li>Speaking opportunities</li>
+            <li>Podcasts / Interviews / Panels</li>
+            <li>Advising on Product + AI + Femtech / Healthtech</li>
+          </ul>
+          <p class="secondary">
+            I&rsquo;m also exploring <span class="email-link">Head of Product</span>, or <span class="email-link">Senior Product Manager</span> roles with exceptional and driven teams. Reach out if this is relevant.
+          </p>
+        </div>
+      </section>
+
+      <footer class="foot">
+        <span>© Dora Jambor · 2026</span>
+      </footer>
+
+    </main>
+  </div>
 </body>
-<html>
+</html>

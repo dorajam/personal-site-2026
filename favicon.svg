@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <circle cx="16" cy="16" r="16" fill="#6b8e72"/>
+  <text
+    x="16"
+    y="21"
+    text-anchor="middle"
+    font-family="monospace, sans-serif"
+    font-weight="bold"
+    font-size="13"
+    fill="#f6f5ef"
+    letter-spacing="0.5"
+  >DJ</text>
+</svg>
